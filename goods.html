@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+
+    <title>Super Dictionary</title>
+    <link rel="stylesheet" href="lib/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .logo {
+            width: 60%;
+            height: 500px;
+            margin: auto;
+        }
+
+        .name {
+            text-align: center;
+            font-size: 66px;
+            text-shadow: 3px 5px grey, 1px 1px #333;
+        }
+
+        .img {
+            width: 48%;
+            height: 53%;
+            margin: auto;
+            margin-top: 38px;
+        }
+
+        .img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .search {
+            width: 80%;
+            height: 100px;
+            margin: auto;
+        }
+
+        .noExtension {
+            width: 60%;
+            height: 100px;
+            margin: auto;
+            font-size: 23px;
+        }
+
+        #search_value {
+            width: 80%;
+            height: 50px;
+            box-shadow: 3px 5px grey, 1px 1px #333;
+        }
+
+        .search button {
+            width: 18%;
+            height: 50px;
+            margin-left: 6px;
+            box-shadow: 3px 5px grey, 1px 1px #333;
+        }
+
+        @keyframes rotate {
+            0% { transform:rotateY(0deg);}
+            25% { transform:rotateY(180deg);}
+            50% { transform:rotateY(0deg);}
+            75% { transform:rotateY(180deg);}
+            100% { transform:rotateY(0deg);}
+        }
+
+        .logo_rotate {
+            /*
+            animation: rotate 10s infinite;
+            animation-fill-mode: forwards;
+            animation-timing-function: linear;
+                */
+            /*  当动画结束时，让<div>元素保留上一个关键帧的样式值 */
+        }
+
+        .result_success {
+            width: 60%;
+            margin: auto;
+            font-size: 22px
+        }
+
+        .result_faile{
+            width: 60%;
+            margin: auto;
+            font-size: 22px
+        }
+
+        .add_banner{
+            width: 80%;
+            margin: auto;
+        }
+
+        .add_banner input{
+            width: 80%;
+            height: 50px;
+            box-shadow: 3px 5px grey, 1px 1px #333;
+        }
+
+        .add_banner button{
+            width: 18%;
+            height: 50px;
+            margin-left: 6px;
+            box-shadow: 3px 5px grey, 1px 1px #333;
+        }
+
+        #search_banner{
+            font-size: 50px;
+            border-bottom: 1px solid black;
+        }
+
+
+        p{
+            text-indent:2em;
+            font-size: 30px;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .contenner{
+            background: url("img/bg.jpg");
+            height: 1500px;
+        }
+
+        .author{
+            text-align: right;
+        }
+        .author p{
+            display: inline-block;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body style="background-color: lightpink">
+
+<!--
+<div id="primary-alert"  class="alert alert-primary fixed-top hide position-relative" role="alert">
+    <a class="close" data-dismiss="alert" href="#" >&times;</a>
+        This is a primary alert with <a  class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+-->
+
+<div class="position-relative">
+    <div class="w-100 position-relative">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Goods Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+        
+    <div class="d-flex">
+        <div class="w-50 position-relative"  style="background-color: lightslategrey; left:0;">
+            <div class="position-relative float-center badge-info rounded" style="background-color:lightgray; top:5%; width: 80%">
+                <span class="badge badge-info">输入物品的名字：</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Name</span>
+                    </div>
+                    <input id="goods_name" type="text" class="form-control" placeholder="goods name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="goods_search" class="btn btn-outline-info " type="button">Search</button>
+                        <button id="goods_add" class="btn btn-outline-success" type="button">Add</button>
+                    </div>
+                </div>
+
+                <span class="badge badge-info">输入物品的价格：</span>
+                <span class="badge badge-secondary">[最少为原价的102%，最少增加0.01nas] </span>
+                <div class="input-group mb-3" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Price</span>
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input id="goods_price" type="text" class="form-control" placeholder="such as 0.02 nas" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append">
+                        <span class="input-group-text">nas</span>
+                        <button id="goods_buy" class="btn btn-outline-info" type="button">Buy</button>
+                    </div>
+                </div>
+
+                <span class="badge badge-info"> 输入物品图片的链接：</span>
+                <span class="badge badge-secondary">[需要先输入物品的名字] </span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Url</span>
+                    </div>
+                    <input id="goods_picurl" type="text" class="form-control" placeholder="picture url" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="goods_picGet" class="btn btn-outline-info " type="button">GetUrl</button>
+                        <button id="goods_picUpdate" class="btn btn-outline-success" type="button">UpdateUrl</button>
+                    </div>
+                </div>
+
+                <span class="badge badge-info"> 输入物品的描述：</span>
+                <span class="badge badge-secondary">[需要先输入物品的名字] </span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Description</span>
+                    </div>
+                    <textarea id="goods_description" type="text" class="form-control" rows="1" placeholder="goods description" aria-label="Recipient's username" aria-describedby="basic-addon2"></textarea>
+                    <div class="input-group-append">
+                        <button id="goods_get_description" class="btn btn-outline-info " type="button">GetDes</button>
+                        <button id="goods_update_description" class="btn btn-outline-success" type="button">UpdateDes</button>
+                    </div>
+                </div>
+
+                <span class="badge badge-info">查找钱包拥有的物品：</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">List Goods</span>
+                    </div>
+                    <input id="wallet_name" type="text" class="form-control" placeholder="wallet string" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="goods_list" class="btn btn-outline-info " type="button">List</button>
+                    </div>
+                </div>
+
+                <span class="badge badge-info">自由查询排行榜：</span>
+                <span class="badge badge-secondary">[format] Top10_2018_Month_5</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">Top 10 topic:</span>
+                    </div>
+                    <input id="top10_topic" type="text" class="form-control" placeholder="topic string" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="get_top10" class="btn btn-outline-info " type="button">List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-50 position-relative" style="background-color: lightskyblue;">
+            <div class="position-relative bg-info rounded-top" style="width:80%; left: 10%;">
+
+                <h2 class="text-center"><span class="badge badge-info" id="rank_list_topic">排行榜</span></h2>
+                <ul class="nav nav-tabs nav-pills" id="show_ranking">
+                    <li class="nav-item">
+                        <a class="nav-link active" name="week" href="#">Week</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  name="month" href="#">Month</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" name="year" href="#">Year</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" name="all" href="#">All</a>
+                    </li>
+                </ul>
+
+                <table class="table table-hover" >
+                    <thead>
+                    <tr class="table-active">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Show</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ranking_list">
+                    <tr class="table-success">
+                        <th scope="row">1</th>
+                        <td id="name">排行榜还没更新</td>
+                        <td id="price">$0.0000nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-info">
+                        <th scope="row">2</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-primary">
+                        <th scope="row">3</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">4</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">5</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">6</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">7</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">8</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">9</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>                    
+                    </tr>
+                    <tr class="table-secondary">
+                        <th scope="row">10</th>
+                        <td id="name"> </td>
+                        <td id="price">$ 0 nas</td>
+                        <td>
+                            <img class="rounded-circle border border-info" id="img_url" style="width: 60px; height: 60px;" src="https://explorer.nebulas.io/static/img/logo.png" >
+                        </td>
+                        <td>
+                            <button class="p-2 btn btn-primary float-center" data-toggle="modal" data-target="#myModal" id="show_myModal">Show</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img class="card-img-top img-thumbnail" id="modal_goods_img" src="https://pic4.zhimg.com/50/v2-5e10a1de257c4db1eb283f5221659dfc_hd.jpg" alt="Card image cap">
+                </div>
+                <div class="modal-body">
+                    <a class="form-control">
+                        <span class="badge badge-info text-center">Goods Name: </span>
+                        <p class="card form-control text-success" id="modal_goods_name">helloworld!</p>
+                    </a>
+                    <a class="form-control">
+                        <span class="badge badge-info text-center">Goods Price: </span>
+                        <p class="form-control text-success" id="modal_goods_price">$ 0.0001 nas</p>
+                    </a>
+                    <a class="form-control">
+                        <span class="text-md badge badge-info text-center">Goods Owner: </span>
+                        <p class=" form-control text-success" id="modal_goods_owner">n1ihJawniwK6gvCLachXkY2XwsCcYLb2AuB</p>
+                    </a>
+                    <a class="text-success form-control">
+                        <span class="badge badge-info text-center">Goods Description: </span>
+                        <p class="card form-control text-success" id="modal_goods_description">
+                            helloworld!
+                            helloworld!
+                            helloworld!
+                            helloworld!
+                            helloworld!
+                        </p>
+                    </a>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+
+<script src=lib/jquery-3.3.1.min.js></script>
+<script src=lib/nebPay.js></script>
+<script src=lib/bootstrap-4.0.0-dist/js/bootstrap.min.js></script>
+<script src=lib/nebulas.js></script>
+<script>
+    $("#show-alert").click(function() {
+        $("#primary-alert").show()
+    })
+</script>
+<script src="goods.html.js"></script>
+</body>
+
+</html>
